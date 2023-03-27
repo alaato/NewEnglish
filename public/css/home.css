@@ -1,0 +1,185 @@
+@font-face {
+  font-family: 'grandslang-roman';
+  src: url('font/grandslang-roman.otf');
+}
+/* CSS */
+html
+{
+  width: 100%;
+}
+body
+{
+  margin: 0;
+  padding: 0;
+  font-family: 'Lora', serif;
+  position: relative;
+  width: 100%;
+  
+}
+.card
+{
+  transition: all 0.2s;
+}
+.img-smaller
+{
+  width: 300px;
+  height: auto;
+}
+.card:hover
+{
+  cursor: pointer;
+  transform: translateY(-5px);
+}
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: center;
+
+}
+body
+{
+  background-image: url('https://webimages.mongodb.com/_com_assets/cms/kv187puqz4ly4m4kj-25.svg?auto=format%252Ccompress');
+  background-position: 0 100px;
+  background-size: contain;
+
+}
+form
+{
+  display: inline;
+}
+a
+{
+  text-decoration: none;
+}
+.nav-link{
+  font-family: 'Rubik', serif;
+  font-style: normal;
+  font-size: 1.25rem ;
+  color: black;
+  text-transform: uppercase;
+} 
+
+.nav-link:hover
+{
+color: rgb(103, 63, 215);
+}
+.active
+{
+  color: rgb(179, 49, 240) !important;
+}
+h1, h2, h3, h4, h5, h6
+{
+
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+p
+
+{
+ font-family: 'Rubik', serif;
+ font-size: 1.125rem;
+}
+.card-text
+{
+  font-size: 1rem;
+}
+.button2
+{
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  border-style: 1px solid black;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: 'Rubik',"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  height: 4rem;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.button2:hover
+{
+  background-image: linear-gradient(92.88deg, #c73bc0 9.16%, #c143cc 43.89%, #ca3fd7 64.72%);
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: 'Rubik',"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  height: 4rem;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  transition-duration: .2s;
+  transform: translateY(-2px);
+}
+.button1 {
+  background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: 'Rubik',"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 500;
+  height: 4rem;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button1:hover {
+  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  transition-duration: .1s;
+  transform: translateY(-2px);
+}
+.about-container
+{
+font-size: 1.25rem;
+text-align: center;
+}
+
+.loginbar .button1, .button2
+
+{
+  height: 3rem;
+}
+@media (max-width: 1024px) {
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: center;
+  
+  }
+  .button1{
+    padding: 0 2.6rem;
+  }
+  .loginbar .button1, .loginbar .button2
+{
+  height: 3rem;
+  padding: 0 1rem;
+}
+}
