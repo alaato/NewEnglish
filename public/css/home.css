@@ -6,6 +6,12 @@
 html
 {
   width: 100%;
+  height: 100%;
+}
+.avatar-img
+{
+  width: 70px;
+  height: auto
 }
 body
 {
@@ -14,11 +20,26 @@ body
   font-family: 'Lora', serif;
   position: relative;
   width: 100%;
-  
+  height: 100%;
+  background-image: url('https://webimages.mongodb.com/_com_assets/cms/kv187puqz4ly4m4kj-25.svg?auto=format%252Ccompress');
+  background-position: 0 60px;
+  background-size: cover;
+}
+.logo
+{
+  width: 50px;
+  height: auto;
 }
 .card
 {
   transition: all 0.2s;
+  position: relative;
+}
+.divlink
+{
+  width: 100%;
+  height: 100%;
+  position:absolute
 }
 .img-smaller
 {
@@ -36,16 +57,36 @@ body
   object-fit: center;
 
 }
-body
+.card-text
 {
-  background-image: url('https://webimages.mongodb.com/_com_assets/cms/kv187puqz4ly4m4kj-25.svg?auto=format%252Ccompress');
-  background-position: 0 100px;
-  background-size: contain;
-
+  font-family: 'heebo', serif;
+}
+.card-body .active
+{
+color: black;
+}
+.top-container
+{
+  background-color: white;
+  color: black;
 }
 form
 {
   display: inline;
+}
+.pink-form
+{
+  background-color: #F9EBFF;
+  color: black;
+}
+.pink-form a
+{
+  color: black;
+}
+p a:hover
+{
+  color: rgb(189, 184, 184);
+  text-decoration: underline;
 }
 a
 {
@@ -63,9 +104,27 @@ a
 {
 color: rgb(103, 63, 215);
 }
-.active
+.navbar .active
 {
   color: rgb(179, 49, 240) !important;
+}
+.course-content
+{
+  font-family: 'Heebo', serif;
+}
+.course-content p
+{
+  font-size: 1rem;
+  font-weight: 300;
+}
+.course-content .nav-link
+{
+  font-size: 1rem !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: rgb(179, 49, 240) !important;
+
+  background-color: rgba(104, 63, 215, 0.075);
 }
 h1, h2, h3, h4, h5, h6
 {
@@ -78,12 +137,18 @@ p
 
 {
  font-family: 'Rubik', serif;
- font-size: 1.125rem;
+ font-size: 1;
 }
-.card-text
+
+li p
 {
-  font-size: 1rem;
+  font-size: 0.75rem;
 }
+li img
+{
+  width: 25px;
+}
+
 .button2
 {
   background-color: #FFFFFF;
@@ -150,7 +215,10 @@ p
   -webkit-user-select: none;
   touch-action: manipulation;
 }
-
+a.button1
+{
+  padding: 0.75rem;
+}
 .button1:hover {
   box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
   transition-duration: .1s;
@@ -167,15 +235,30 @@ text-align: center;
 {
   height: 3rem;
 }
+@media (max-height:600px) {
+  .nav-container
+  {
+    transform: scale(0.8) ;
+  }
+}
 @media (max-width: 1024px) {
+  .ratio-16x9
+  {
+    --bs-aspect-ratio: 50%;
+  }
   .card-img-top {
     width: 100%;
     height: auto;
     object-fit: center;
   
   }
-  .button1{
+  .button1
+  {
     padding: 0 2.6rem;
+  }
+  a.button1
+  {
+    padding: 0.75rem;
   }
   .loginbar .button1, .loginbar .button2
 {

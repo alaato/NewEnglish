@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const engine = require('ejs-mate');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 app.use(session({secret: 'keyboard', resave: false, saveUninitialized: false}));
 
@@ -15,8 +16,8 @@ main().catch(err => console.log(err));
 
 async function main() {
     try {
-        console.log("connected g mongoose");
-        await mongoose.connect('mongodb://127.0.0.1:27017/YelpCamp');
+        console.log("connected to zno");
+        await mongoose.connect('mongodb://127.0.0.1:27017/zno');
       } catch (error) {
         handleError(error);
       }
@@ -33,27 +34,28 @@ app.set('views', path.join(__dirname, 'views'))
 app.get('/', (req, res) => {
     res.render('Courses/home');
   })
+  app.get('/course/:coursename', (req, res) => {
+    res.render('Courses/courseinfo');
+  })
+  app.get('/course/:coursename/:id', (req, res) => {
+    res.render('Courses/courseshow');
+  })
+
   app.get('/signup', (req, res) => {
-    res.render('Courses/signup');
+    res.render('authuntication/signup');
   })
 app.get('/login', (req, res) => {
-    res.render('Courses/login');
+    res.render('authuntication/login');
   })
   app.post('/login', function(req, res) {
-    var email = req.body.email;
-    var password = req.body.password;
-    
   res.redirect('/userInfo' )
-    // Check if username and password are correct
    
   });
-
   app.get('/userInfo', function(req, res) {
-    // Check if user is logged in
-    res.render('Courses/userInfo', { user: req.session.user });
+
+    res.render('authuntication/userInfo');
   
-    // Render user info page
-    res.render('user-info', { user: req.session.user });
+
   });
 app.listen(3000, ()=> console.log('server is running'));
 
