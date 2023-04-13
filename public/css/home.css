@@ -5,8 +5,7 @@
 /* CSS */
 html
 {
-  width: 100%;
-  height: 100%;
+
 }
 .avatar-img
 {
@@ -19,8 +18,7 @@ body
   padding: 0;
   font-family: 'Lora', serif;
   position: relative;
-  width: 100%;
-  height: 100%;
+
   background-image: url('https://webimages.mongodb.com/_com_assets/cms/kv187puqz4ly4m4kj-25.svg?auto=format%252Ccompress');
   background-position: 0 60px;
   background-size: cover;
@@ -53,7 +51,7 @@ body
 }
 .card-img-top {
   width: 100%;
-  height: 15vw;
+  height: auto;
   object-fit: center;
 
 }
@@ -229,7 +227,9 @@ a.button1
 font-size: 1.25rem;
 text-align: center;
 }
-
+.collapsing {
+  transition: height 0s ;
+}
 .loginbar .button1, .button2
 
 {

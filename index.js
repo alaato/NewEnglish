@@ -5,12 +5,15 @@ const path = require('path');
 const engine = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const user = require('./Models/users');
+const course = require('./Models/courses');
+const authRoute = require('./Routes/auth')
+const CourseRoute = require('./Routes/courseRoute')
+const commentRoute = require('./Routes/commentsRoute')
 
-app.use(session({secret: 'keyboard', resave: false, saveUninitialized: false}));
 
-app.use(express.static( "public" ) );
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 main().catch(err => console.log(err));
 
@@ -30,32 +33,39 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
 
+app.use(session({secret: 'keyboard', resave: false, saveUninitialized: false,   cookie: {
+  maxAge: 1000 * 60 * 60 * 24 * 7
+}}));
 
-app.get('/', (req, res) => {
-    res.render('Courses/home');
-  })
-  app.get('/course/:coursename', (req, res) => {
-    res.render('Courses/courseinfo');
-  })
-  app.get('/course/:coursename/:id', (req, res) => {
-    res.render('Courses/courseshow');
-  })
+app.use(flash());
+app.use(express.static( "public" ) );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-  app.get('/signup', (req, res) => {
-    res.render('authuntication/signup');
-  })
-app.get('/login', (req, res) => {
-    res.render('authuntication/login');
-  })
-  app.post('/login', function(req, res) {
-  res.redirect('/userInfo' )
-   
-  });
-  app.get('/userInfo', function(req, res) {
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(user.createStrategy());
+passport.serializeUser(user.serializeUser())
+passport.deserializeUser(user.deserializeUser())
 
-    res.render('authuntication/userInfo');
+app.use((req,res,next)=>{
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
+  next();
+ })
+
+app.use('/course', CourseRoute);
+app.use('/course/:title/lecture/:id', commentRoute);
+app.use(authRoute);
+app.get('/', async(req, res) => {
+  const all = await course.find({});
+  console.log(all);
+  res.render('Courses/home', {all});
+  })
   
 
-  });
+  
+  
 app.listen(3000, ()=> console.log('server is running'));
 

@@ -12,8 +12,14 @@
         </div>
       </div>
       <div class="loginbar mx-2">
-        <a class="button1 p-3" href="/login">Login</a>
-        <a class="button2 p-3" href="/signup">Signup</a>
+        <% if (currentUser) { %>
+          <form  action="/logout" method="post"><button class="button2 " type="submit">Signout</button></form>
+
+        <% } else { %>
+          <a class="button1 p-3" href="/login">Login</a>
+          <a class="button2 p-3" href="/signup">Signup</a>
+          <%   } %>
+       
     </div>
     </div>
   </nav>

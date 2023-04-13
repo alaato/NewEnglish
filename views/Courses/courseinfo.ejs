@@ -3,25 +3,19 @@
 
     <section class="row  my-4 pt-4">
         
-        <div class=" col-12   d-flex flex-column justify-content-center align-items-end">
+        <div class=" col-12   d-flex flex-column ">
             <div class="card shadow p-5" >
                 <div class="card-body">
                   <h2 class="card-title">Course title</h2>
-                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit qui officiis, soluta recusandae, quam obcaecati ab harum facere minus deserunt atque reprehenderit velit a magnam nihil culpa excepturi. Atque, illum</p>
+                  <p class="card-text"><%= course.description %></p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex align-items-center">
-                        <img class = "me-2" src="/images/tick.svg" alt="no">
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                    </li>
-                    <li class=" list-group-item d-flex align-items-center">
-                        <img class = "me-2" src="/images/tick.svg" alt="no">
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                    </li>
-                    <li class=" list-group-item d-flex align-items-center">
-                        <img class = "me-2" src="/images/tick.svg" alt="no">
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                    </li>
+                    <% for( let point of course.points ) { %>
+                        <li class="list-group-item d-flex align-items-center">
+                            <img class = "me-2" src="/images/tick.svg" alt="no">
+                            <p class="mb-0"><%= point %> </p>
+                        </li>
+                    <% } %>
                 </ul>
             
               </div>
@@ -30,9 +24,10 @@
         </div>
         
 
-    </section>
+</section>
+                    <!-- Description Card -->
 
-    <section class="row mt-5 course-content justify-content-between">
+<section class="row mt-5 course-content justify-content-between">
         <div class="col-lg-9 mb-2">
             <div class="card shadow rounded-2 p-0">
                 <!-- Tabs START -->
@@ -46,11 +41,6 @@
                         <li class="nav-item me-2 me-sm-4" role="presentation">
                             <button class="nav-link mb-2 mb-md-0 " id="course-pills-tab-1" data-bs-toggle="pill" data-bs-target="#course-pills-1" type="button" role="tab" aria-controls="course-pills-1" aria-selected="false">Curriculum</button>
                         </li>
-                        <!-- Tab item -->
-                        <li class="nav-item me-2 me-sm-4" role="presentation">
-                            <button class="nav-link mb-2 mb-md-0 " id="course-pills-tab-2" data-bs-toggle="pill" data-bs-target="#course-pills-2" type="button" role="tab" aria-controls="course-pills-2" aria-selected="false">Comment</button>
-                        </li>
-
                     </ul>
                 </div>
                 <!-- Tabs END -->
@@ -62,16 +52,13 @@
                         <div class="tab-pane fade active show" id="course-pills-0" role="tabpanel" aria-labelledby="course-pills-tab-0">
                             <!-- Course detail START -->
                             <h5 class="mb-5">Course Description</h5>
-                            <p class="mb-5">Our ZNO English preparation program is designed to provide students with the knowledge and skills they need to excel on the test. We focus on all areas of the exam, including reading, writing, speaking, listening, and grammar, and provide students with ample opportunities to practice and improve their skills through interactive activities and practice tests.</p>                            
+                            <p class="mb-5"><%= course.description %></p>                            
                             <!-- List content -->
                             <h5 class="my-5">What you'll learn</h5>
                             <ul class="list-group list-group-borderless my-4">
-                                <li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Strategies for approaching the different sections of the ZNO English test.</li>
-                                <li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Vocabulary and grammar rules necessary for the ZNO English test.</li>
-                                <li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Techniques for improving reading comprehension skills, including skimming and scanning</li>
-                                <li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Skills for writing effective essays, including structure, organization, and supporting arguments.</li>
-                                <li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Speaking and listening skills necessary for the ZNO English test, including pronunciation, fluency, and comprehension</li>
-                                <li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i>Confidence and test-taking strategies to help students achieve their best possible score on the ZNO English test.</li>
+                                <% for( let point of course.points ) { %>
+                                    <li class="list-group-item h6 fw-light d-flex mb-0"><i class="fas fa-check-circle text-success me-2"></i><%= point %></li>
+                                <% } %>
 
                             </ul>
                             <p class="mb-3">As it so contrasted oh estimating instrument. Size like body someone had. Are conduct viewing boy minutes warrant the expense? Tolerably behavior may admit daughters offending her ask own. Praise effect wishes change way and any wanted. Lively use looked latter regard had. Do he it part more last in. </p>
@@ -217,127 +204,6 @@
                         </div>
                         <!-- Content END -->
 
-                        <!-- Content START -->
-                        <div class="tab-pane fade " id="course-pills-2" role="tabpanel" aria-labelledby="course-pills-tab-2">
-                            <!-- Review START -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <h5 class="mb-4">Ask Your Question</h5>
-
-                                    <!-- Comment box -->
-                                    <div class="d-flex mb-4">
-                                        <!-- Avatar -->
-                                        <div class="avatar avatar-sm flex-shrink-0 me-2">
-                                            <a href="#"> <img class="avatar-img rounded-circle" src="assets/images/avatar/09.jpg" alt=""> </a>
-                                        </div>
-
-                                        <form class="w-100 d-flex">
-                                            <textarea class="one form-control pe-4 bg-light" id="autoheighttextarea" rows="1" placeholder="Add a comment..."></textarea>
-                                            <button class="btn btn-primary ms-2 mb-0" type="button">Post</button>
-                                        </form>
-                                    </div>
-
-                                    <!-- Comment item START -->
-                                    <div class="border p-2 p-sm-4 rounded-3 mb-4">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="comment-item">
-                                                <div class="d-flex mb-3">
-                                                    <!-- Avatar -->
-                                                    <div class="avatar avatar-sm flex-shrink-0">
-                                                        <a href="#"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
-                                                    </div>
-                                                    <div class="ms-2">
-                                                        <!-- Comment by -->
-                                                        <div class="bg-light p-3 rounded">
-                                                            <div class="d-flex justify-content-center">
-                                                                <div class="me-2">
-                                                                    <h6 class="mb-1 lead fw-bold"> <a href="#!"> Frances Guerrero </a></h6>
-                                                                    <p class="h6 mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection?</p>
-                                                                </div>
-                                                                <small>5hr</small>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Comment react -->
-                                                        <ul class="nav nav-divider py-2 small">
-                                                            <li class="nav-item"> <a class="text-primary-hover" href="#"> Like (3)</a> </li>
-                                                            <li class="nav-item"> <a class="text-primary-hover" href="#"> Reply</a> </li>
-                                                            <li class="nav-item"> <a class="text-primary-hover" href="#"> View 5 replies</a> </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                                <!-- Comment item nested START -->
-                                                <ul class="list-unstyled ms-4">
-                                                    <!-- Comment item START -->
-                                                    <li class="comment-item">
-                                                        <div class="d-flex">
-                                                            <!-- Avatar -->
-                                                            <div class="avatar avatar-xs flex-shrink-0">
-                                                                <a href="#"><img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt=""></a>
-                                                            </div>
-                                                            <!-- Comment by -->
-                                                            <div class="ms-2">
-                                                                <div class="bg-light p-3 rounded">
-                                                                    <div class="d-flex justify-content-center">
-                                                                        <div class="me-2">
-                                                                            <h6 class="mb-1  lead fw-bold"> <a href="#"> Lori Stevens </a> </h6>
-                                                                            <p class=" mb-0">See resolved goodness felicity shy civility domestic had but Drawings offended yet answered Jennings perceive. Domestic had but Drawings offended yet answered Jennings perceive.</p>
-                                                                        </div>
-                                                                        <small>2hr</small>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Comment react -->
-                                                                <ul class="nav nav-divider py-2 small">
-                                                                    <li class="nav-item"><a class="text-primary-hover" href="#!"> Like (5)</a></li>
-                                                                    <li class="nav-item"><a class="text-primary-hover" href="#!"> Reply</a>	</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <!-- Comment item END -->
-                                                </ul>
-                                                <!-- Comment item nested END -->
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- Comment item END -->
-
-                                    <!-- Comment item START -->
-                                    <div class="border p-2 p-sm-4 rounded-3">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="comment-item">
-                                                <div class="d-flex">
-                                                    <!-- Avatar -->
-                                                    <div class="avatar avatar-sm flex-shrink-0">
-                                                        <a href="#"><img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt=""></a>
-                                                    </div>
-                                                    <div class="ms-2">
-                                                        <!-- Comment by -->
-                                                        <div class="bg-light p-3 rounded">
-                                                            <div class="d-flex justify-content-center">
-                                                                <div class="me-2">
-                                                                    <h6 class="mb-1 lead fw-bold"> <a href="#!"> Louis Ferguson </a></h6>
-                                                                    <p class="h6 mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection?</p>
-                                                                </div>
-                                                                <small>5hr</small>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Comment react -->
-                                                        <ul class="nav nav-divider py-2 small">
-                                                            <li class="nav-item"> <a class="text-primary-hover" href="#"> Like</a> </li>
-                                                            <li class="nav-item"> <a class="text-primary-hover" href="#"> Reply</a> </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- Comment item END -->
-
-                        <!-- Content END -->
-
-    
-
                     </div>
                 </div>
                 <!-- Tab contents END -->
@@ -349,28 +215,28 @@
                     <!-- Subscribe Card -->
         <div class=" col-sm-12 col-lg-3">   
             <div class="card shadow mx-auto" >
-                <img src="/images/Zno.svg" class="card-img-top" alt="...">
+                <img src="/<%= course.img %>" class="card-img-top img-fluid" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <h6 class="card-text fw-semibold">This course includes:</h6>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">An item</li>
-                  <li class="list-group-item">A second item</li>
+                  <li class="list-group-item"> <b>Length</b> :<%= course.length %>h</li>
+                  <li class="list-group-item"><b>Price</b>  : <%= course.price %>$</li>
                   <li class="list-group-item">A third item</li>
                 </ul>
                 
-                <div class="card-body">
-                  <% if(true){ %>
-                    <a href="/course/zno/lecture" class="button1">subscribe</a>
+                <div class="card-body py-4">
+                  <% if(currentUser){ %>
+                    <a href="/course/<%= course.title %>/lecture/1" class="button1">subscribe</a>
                     <% } else{ %>  
-                    <a href="#" class="card-link p-3 button1">enroll</a>
+                    <a href="/course/<%= course.title %>/lecture/1" class="card-link py-3 button1">enroll</a>
                  <% } %>
                 </div>
               </div>
         </div>
-        </section>
+</section>
     
-    </section>
+
     
 

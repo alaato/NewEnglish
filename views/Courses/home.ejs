@@ -8,7 +8,7 @@
         <h1>Prepare for zno</h1>
         <p>The results of our students best describe the level of training we provide Prepare with professional teachers at an affordable price</p>
         <span>
-          <form action="/login">
+          <form action="#courses">
             <button class="button1">Show Courses</button>
           </form>
             <form action="/signup" class="d-inline">
@@ -86,7 +86,7 @@
     <div class="row row-cols-1 row-cols-lg-3 g-4">
         <div class="col">
           <div class="card shadow h-100">
-            <a href="/course/zno" class="divlink"></a>
+            <a href="/course/<%= all[0].title %>" class="divlink"></a>
             <img class="card-img-top" src="images/Zno.svg " alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">Zno Bootcamp</h5>
@@ -99,6 +99,7 @@
         </div>
         <div class="col">
           <div class="card shadow h-100">
+            <a href="/course/<%= all[1].title %>" class="divlink"></a>
             <img class="card-img-top " src="images/english.jpg" alt="Card image cap">
 
             <div class="card-body">
@@ -112,6 +113,7 @@
         </div>
         <div class="col">
           <div class="card shadow h-100">
+            <a href="/course/<%= all[2].title %>" class="divlink"></a>
             <img class="card-img-top" src="images/Frame 1.png" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">Pronuncitiaon Bootcamp</h5>
@@ -252,14 +254,14 @@
 
     <!-- test Section -->
 
-    <section id="test">
+    <!-- <section id="test">
       <h1 class="mt-5 text-center">Test</h1>
       <div class="row m-3 vh-100">
         <div class="col-sm-12 ">
           <iframe id="frame" style="position: absolute; top: -9999em; visibility: hidden;" onload="this.style.position='static'; this.style.visibility='visible';" class= "ratio ratio-16x9" height="90%" src="https://app.tracktest.eu/registration?dh=znopre&embed=1"> </iframe>    
         </div>
 
-      </div>
+      </div> -->
 
     </section>
 

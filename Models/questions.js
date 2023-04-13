@@ -3,11 +3,11 @@ const { Schema, model } = require('mongoose')
 const QuestionsSchema = new Schema({
     question : {
         type : String,
-        required : yes
+        required : true
     },
-    createdBy : {
+    author : {
         type : Schema.Types.ObjectId,
-        ref : 'consumer'
+        ref : 'users'
     },
     replies : [{
         type : Schema.Types.ObjectId,
@@ -17,6 +17,8 @@ const QuestionsSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'videos'
     },
+    likes : Number,
+    date: Date
 })
 
 const Questions = model('questions', QuestionsSchema)
