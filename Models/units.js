@@ -5,12 +5,18 @@ const UnitSchema = new Schema({
         type : String,
         required : true
     },
+    course:
+    {
+        type : Schema.Types.ObjectId,
+        ref: 'course',
+    },
+    order : Number,
     video :[ {
         type : Schema.Types.ObjectId,
-        ref : 'videos'
+        ref : 'video'
     },]
 })
 
-const Units = model('questions', UnitSchema)
 
-module.exports = Units
+
+module.exports = model('unit', UnitSchema)

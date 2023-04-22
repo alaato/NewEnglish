@@ -1,27 +1,66 @@
 const express = require('express');
 const router = express.Router();
 const Course = require('../Models/courses');
+const unit = require('../Models/units');
 const Videos = require('../Models/videos');
+const {UserExists, UserHasCourse} = require('../middlewares/auth');
 
 router.get('/:title', async(req, res) => {
   const {title} = req.params;
-  console.log(title)
-  const course = await Course.findOne({title:title});
-    res.render('Courses/courseinfo', {course});
+  const User = req.user
+  const course = await Course.findOne({title:title}).populate(
+    {path: 'unit',
+      populate: { 
+        path : 'video'
+      }
+    });
+  if (User){
+    await User.populate('subscribedCourses')
+  }
+    res.render('Courses/courseinfo', {course,User});
   })
-  router.post('/:title/subscribe', async(req, res) => {
+
+  router.get('/:title/subscribe',UserExists, async(req, res) => {
+    let hasCourse = false;
     const {title} = req.params;
-    const user = req.user;
-    console.log(title)
     const course = await Course.findOne({title:title});
-    user.subscribedCourses.push(course._id);
+    const User = req.user;
+    await User.populate('subscribedCourses')
+    for (let Subcourse of User.subscribedCourses)
+    {
+      console.log(course.id, Subcourse.id)
+      if (course.id == Subcourse.id)
+      {
+        hasCourse = true;
+      }
+    }
+    if (!hasCourse)
+    {
+      User.subscribedCourses.push(course._id);
+      await User.save()
+      res.redirect(`/userinfo`)
+    }
+    else
+    {
+      res.redirect(`/userinfo`)
+
+    }
 
   })
-router.get('/:title/lecture/:id', async(req, res) => {
-  const id = req.params.id;
-  console.log(id)
-  const video = await Videos.findOne({order:id});
-  console.log(video.url)
-  res.render('Courses/videoshow', {video});
+router.get('/:title/lecture/:id',UserExists, UserHasCourse, async(req, res) => {
+  const {id,title} = req.params;
+  const course = await Course.findOne({title}).populate(
+    {path: 'unit',
+      populate: { 
+        path : 'video'
+      }
+    });
+  const Video = await Videos.findById(id).populate({
+    path: 'comments',
+    populate: {
+      path : 'author'
+    }
+  });
+  res.render('Courses/videoshow', {Video, course});
   })
 module.exports = router;

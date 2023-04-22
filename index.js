@@ -12,8 +12,8 @@ const course = require('./Models/courses');
 const authRoute = require('./Routes/auth')
 const CourseRoute = require('./Routes/courseRoute')
 const commentRoute = require('./Routes/commentsRoute')
-
-
+const nodemailer = require('nodemailer');
+const ExpressError = require('./Util/ExpressError')
 
 main().catch(err => console.log(err));
 
@@ -31,16 +31,22 @@ async function main() {
 app.engine('ejs', engine)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
-
-
-app.use(session({secret: 'keyboard', resave: false, saveUninitialized: false,   cookie: {
-  maxAge: 1000 * 60 * 60 * 24 * 7
-}}));
-
-app.use(flash());
 app.use(express.static( "public" ) );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+  httpOnly: true,
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+
+}))
+app.use(flash());
+
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -49,6 +55,7 @@ passport.serializeUser(user.serializeUser())
 passport.deserializeUser(user.deserializeUser())
 
 app.use((req,res,next)=>{
+
   res.locals.currentUser = req.user;
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
@@ -60,12 +67,18 @@ app.use('/course/:title/lecture/:id', commentRoute);
 app.use(authRoute);
 app.get('/', async(req, res) => {
   const all = await course.find({});
-  console.log(all);
   res.render('Courses/home', {all});
   })
   
 
   
-  
+app.all('*', (req, res, next)=>{
+    next(new ExpressError('UH-OH\n NOTHING IS HERE, DEAR',404))
+})
+app.use((err, req, res,  next)=>
+{
+res.render('Partials/error',{err})
+})
+
 app.listen(3000, ()=> console.log('server is running'));
 

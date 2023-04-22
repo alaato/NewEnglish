@@ -13,6 +13,6 @@ const QuestionsSchema = new Schema({
     date: Date
 })
 
-const replies = model('questions', QuestionsSchema)
+const replies = model('replies', QuestionsSchema)
 
 module.exports = replies

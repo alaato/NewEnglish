@@ -72,133 +72,48 @@
                             <!-- Course accordion START -->
                             <div class="accordion accordion-icon accordion-bg-light" id="accordionExample2">
                                 <!-- Item -->
-                                <div class="accordion-item mb-3">
-                                    <h6 class="accordion-header font-base" id="heading-1">
-                                        <button class="accordion-button fw-bold rounded d-sm-flex d-inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                                            Unit 1 : present
-                                            <span class="small ms-0 ms-sm-2">(3 Lectures)</span> 
-                                        </button>
-                                    </h6>
-                                    <div >
-                                        <div id="collapse-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordionExample2" >
-                                            <div class="accordion-body">
-                                                <!-- Course lecture -->
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="position-relative d-flex align-items-center">
-                                                        <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
-                                                            <i class="fas fa-play me-0"></i>
-                                                        </a>
-                                                        <span class="d-inline-block  ms-2 mb-0 h6 fw-light w-100px w-sm-200px w-md-400px">Introduction</span>
+                          <% for( let unit of  course.unit ) { %>
+                            <div class="accordion-item mb-3">
+                                <h6 class="accordion-header font-base" id="heading-<%= unit.order %>">
+                                    <button class="accordion-button fw-bold rounded d-sm-flex d-inline-block <% if (unit.order !==1 ) { %>
+                                     collapsed
+                                    <% } %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= unit.order %>" aria-expanded="true" aria-controls="collapse-<%= unit.order %>">
+                                        <%= unit.title %>
+                                        <span class="small ms-0 ms-sm-2">(<%= unit.video.length%> Lectures)</span> 
+                                    </button>
+                                </h6>
+                                <div >
+                                    <div id="collapse-<%= unit.order %>" class="accordion-collapse collapse <% if (unit.order==1) { %>
+                                     show
+                                    <% } %> " aria-labelledby="heading-<%= unit.order %>" data-bs-parent="#accordionExample2" >
+                                        <div class="accordion-body">
+                                            <% for( let video of unit.video ) { %>
+                                                     <!-- Course lecture -->
+                                                     <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="position-relative d-flex align-items-center">
+                                                            <a href="/course/<%= course.title %>/lecture/<%= video.id %>" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
+                                                                <i class="fas fa-play me-0"></i>
+                                                            </a>
+                                                            <span class="d-inline-block  ms-2 mb-0 h6 fw-light w-100px w-sm-200px w-md-400px"><%= video.title %></span>
+                                                        </div>
                                                     </div>
-                                                    <p class="mb-0">2m 10s</p>
-                                                </div>
-    
-                                                <hr> <!-- Divider -->
-    
-                                                <!-- Course lecture -->
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="position-relative d-flex align-items-center">
-                                                        <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
-                                                            <i class="fas fa-play me-0"></i>
-                                                        </a>
-                                                        <span class="d-inline-block  ms-2 mb-0 h6 fw-light w-100px w-sm-200px w-md-400px"> present simple</span>
-                                                    </div>
-                                                    <p class="mb-0 ">15m 10s</p>
-                                                </div>
-    
-                                                <hr> <!-- Divider -->
-    
-                                                <!-- Course lecture -->
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="position-relative d-flex align-items-center">
-                                                        <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
-                                                            <i class="fas fa-play me-0"></i>
-                                                        </a>
-                                                        <span class="d-inline-block  ms-2 mb-0 h6 fw-light w-100px w-sm-200px w-md-400px">present simple vs present continues</span>
-                                                    </div>
-                                                    <p class="mb-0">18m 10s</p>
-                                                </div>
-                                            </div>
+                                                    <% if (video !== unit.video[unit.video.length-1] ) { %>
+                                                        <hr> <!-- Divider -->
+                                                    <% } %>
+                                                   
+                                            <% } %>
                                         </div>
                                     </div>
-                                    
                                 </div>
+                                
+                            </div>
+                          <% } %>
 
-                                <!-- Item -->
-                                <div class="accordion-item mb-3">
-                                    <h6 class="accordion-header font-base" id="heading-2">
-                                        <button class="accordion-button fw-bold collapsed rounded d-sm-flex d-inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-                                            Unit 2 :
-                                            <span class="small ms-0 ms-sm-2">(4 Lectures)</span> 
-                                        </button>
-                                    </h6>
-                                    <div id="collapse-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordionExample2">
-                                        <!-- Accordion body START -->
-                                        <div class="accordion-body mt-3">
-                                            <!-- Course lecture -->
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="position-relative d-flex align-items-center">
-                                                    <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
-                                                        <i class="fas fa-play me-0"></i>
-                                                    </a>
-                                                    <span class="d-inline-block  ms-2 mb-0 h6 fw-light w-100px w-sm-200px w-md-400px">past simple</span>
-                                                </div>
-                                                <p class="mb-0">5m 20s</p>
-                                            </div>
-
-                                            <hr> <!-- Divider -->
-
-                                            <!-- Course lecture -->
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="position-relative d-flex align-items-center">
-                                                    <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
-                                                        <i class="fas fa-play me-0"></i>
-                                                    </a>
-                                                    <span class="d-inline-block  ms-2 mb-0 h6 fw-light w-100px w-sm-200px w-md-400px">past continuous</span>
-                                                </div>
-                                                <p class="mb-0 ">6m 20s</p>
-                                            </div>
-                                            
-                                            <hr> <!-- Divider -->
-
-                                            <!-- Course lecture -->
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="position-relative d-flex align-items-center">
-                                                    <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
-                                                        <i class="fas fa-play me-0"></i>
-                                                    </a>
-                                                    <span class="d-inline-block  ms-2 mb-0 h6 fw-light w-100px w-sm-200px w-md-400px">past simple vs past continuous </span>
-                                                </div>
-                                                <p class="mb-0">11m 30s</p>
-                                            </div>
-                                            
-                                            <hr> <!-- Divider -->
-
-                                            <!-- Course lecture -->
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="position-relative d-flex align-items-center">
-                                                    <div>
-                                                        <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            <i class="fas fa-play me-0"></i>
-                                                        </a>
-                                                    </div>
-                                                    <div class="row g-sm-0 align-items-center">
-                                                        <div class="col-sm-6">
-                                                            <span class="d-inline-block  ms-2 mb-0 h6 fw-light w-100px w-md-400px">practice</span>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                                <p class="mb-0 d-inline-block  w-70px w-sm-60px">35m 30s</p>
-                                            </div>
-                                        </div>
+                                <!-- Item end -->
+                                
                                         <!-- Accordion body END -->
                                     </div>
                                 </div>
-
-   
- 
-
                             </div>
                             <!-- Course accordion END -->
                         </div>
@@ -227,11 +142,22 @@
                 </ul>
                 
                 <div class="card-body py-4">
-                  <% if(currentUser){ %>
-                    <a href="/course/<%= course.title %>/lecture/1" class="button1">subscribe</a>
-                    <% } else{ %>  
-                    <a href="/course/<%= course.title %>/lecture/1" class="card-link py-3 button1">enroll</a>
-                 <% } %>
+                    
+                  <% if(User && User.subscribedCourses.length !== 0 ){ %>
+                    <% var exists = false %>
+                    <% for( let subcourse of User.subscribedCourses) { %>
+                    <% if (subcourse.id === course.id) { %>
+                        <a href="/course/<%= course.title %>/lecture/<%= course.unit[0].video[0].id %>" class="button1">go to lecture</a>
+                        <% exists = true %>
+                    <% } %>
+                    <% } %>
+                    <% if (!exists) { %>
+                        <a href="/course/<%= course.title %>/subscribe" class="card-link py-3 button1">enroll</a>
+
+                    <% } %>
+                 <% } else { %>                   
+                    <a href="/course/<%= course.title %>/subscribe" class="card-link py-3 button1">enroll</a>
+                <% } %>
                 </div>
               </div>
         </div>

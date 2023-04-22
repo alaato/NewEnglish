@@ -9,10 +9,18 @@ const userSchema = new schema({
         unique: true
     },
     subscribedCourses: [{
-        typeof: mongoose.Schema.Types.ObjectId,
-        ref: 'Course'
-    }]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'course'
+    }],
+    confirmed:
+    {
+        type: Boolean,
+        default: false
+    }
 })
 
-userSchema.plugin(mongoosepassport, {usernameField: 'email' });
+userSchema.plugin(mongoosepassport, {usernameField: 'email',
+errorMessages: {
+    UserExistsError: 'This email address is already registered'
+  } });
 module.exports = mongoose.model('user', userSchema);

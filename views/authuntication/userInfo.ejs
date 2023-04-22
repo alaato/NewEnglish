@@ -4,41 +4,27 @@
 <section class="vh-100 mt-5 pt-5">
 
 
-<h2>Welcome <%= currentUser.username %></h2>
+<h2>Welcome <%= User.username %></h2>
 
 <p>Subscribed courses:</p>
- <div class="row">
-    <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-    </div>
+<div class="row row-cols-1 row-cols-lg-3 g-4">
+  <% for( let course of User.subscribedCourses ) { %>
 
+    <div class="col">
+        <div class="card shadow h-100">
+          <a class="divlink" href="/course/<%= course.title %>"></a>
+            <img src="<%= course.img %>" class="card-img-top img-fluid" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= course.title %></h5>
+              <p class="card-text"><%= course.description %></p>
+            </div>
+            <div class="card-footer">
+              <small class="text-body-secondary"> course length : <%= course.length %>H</small>
+            </div>
+          </div>
+    </div>
+<% } %>
+ 
  </div>
 
 </section>

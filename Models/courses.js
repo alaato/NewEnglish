@@ -7,13 +7,6 @@ const CourseSchema = new Schema({
     title : String,
     price : Number,
     img: String,
-    video:
-    [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'video'
-        }
-    ],
     unit: [{
         type : Schema.Types.ObjectId,
         ref: 'unit'
@@ -28,4 +21,4 @@ const CourseSchema = new Schema({
     ],
     length: Number,
 })
-module.exports = mongoose.model('Course', CourseSchema)
+module.exports = mongoose.model('course', CourseSchema)

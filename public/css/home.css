@@ -3,10 +3,7 @@
   src: url('font/grandslang-roman.otf');
 }
 /* CSS */
-html
-{
 
-}
 .avatar-img
 {
   width: 70px;
@@ -25,7 +22,7 @@ body
 }
 .logo
 {
-  width: 50px;
+  width: 30px;
   height: auto;
 }
 .card

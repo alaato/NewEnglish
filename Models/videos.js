@@ -11,15 +11,19 @@ const VideoSchema = new Schema({
         trim : true
     },
     order: Number,
+    unit :{
+        type : Schema.Types.ObjectId,
+        ref: 'unit'
+    },
     course :{
         type : Schema.Types.ObjectId,
         ref : 'course'
     },
-    questions : [{
+    comments : [{
         type : Schema.Types.ObjectId,
-        ref : 'questions'
+        ref : 'comment'
     }]
 })
 
-module.exports = model('videos', VideoSchema)
+module.exports = model('video', VideoSchema)
 
