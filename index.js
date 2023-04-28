@@ -88,5 +88,5 @@ app.use((err, req, res,  next)=>
 res.render('Partials/error',{err})
 })
 
-app.listen(3000, ()=> console.log('server is running'));
+app.listen(10000, ()=> console.log('server is running'));
 
