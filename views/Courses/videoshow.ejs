@@ -123,32 +123,72 @@
                                 <div class="border p-2 p-sm-4 rounded-3 mb-4">
                                     <ul class="list-unstyled mb-0">
                                         <% for( let comment of Video.comments) { %>
-                                            <li class="comment-item">
-                                                <div class="d-flex mb-3">
-                                                    <div class="ms-2">
+                                            <li class="comment-item border-bottom ">
+                                                <div class="d-flex mb-1">
+                                                    <div class="ms-2 w-100">
                                                         <!-- Comment by -->
-                                                        <div class="bg-light rounded">
-                                                            <div class="d-flex justify-content-center">
-                                                                <div class="me-2">
-                                                                    <h6 class="mb-1 lead fw-bold"> <a href="#!"> <%= comment.author.username %> </a></h6>
-                                                                    <p class="h6 mb-0"><%= comment.text %></p>
+                                                            <div class="bg-light rounded me-2 d-inline-flex flex-column justify-content-start w-100">
+                                                                <div class="d-flex w-100"> 
+                                                                    <h6 class="mb-1 lead fw-bold d-inline"> <a href="#!"> <%= comment.author.username %> </a></h6>
+                                                                    <small class="d-inline ms-2"><%= comment.ago %></small>
+                                                                    <% if (currentUser.id == comment.author.id) { %>
+                                                                    <form class="ms-auto" action="/course/<%= course.title %>/lecture/<%= Video.id %>/<%= comment.id %>?_method=delete" method="post"> <button class="btn btn-danger" type="submit"> <img src="/images/trash.svg" alt=""></button></form>
+                                                                    <% } %>
+
                                                                 </div>
-                                                                <small>5hr</small>
+                                                                    <p class="h6 mb-0"><%= comment.text %></p>
+                                                                
                                                             </div>
-                                                        </div>
                                                         <!-- Comment react -->
-                                                        <ul class="nav nav-divider py-3 small">
+                                                        <ul class="nav nav-divider pt-3 small">
                                                             <li class="nav-item ms-1"> <a class="text-primary-hover" href="#"> <%= comment.like %> Like </a> </li>
-                                                            <li class="nav-item ms-1"> <a class="text-primary-hover" href="#"> Reply</a> </li>
+                                                            <li class="nav-item ms-1" > <a class="text-primary-hover reply-button"> Reply</a> </li>
                                                             <li class="nav-item ms-1"> <a class="text-primary-hover" href="#"> View  replies</a> </li>
                                                         </ul>
+                                                 <!-- Add reply -->
+                                                 <div class="d-flex mb-4 w-100" >       
+                                                    <form  class="w-100 d-flex reply d-none" action = "/course/<%= course.title %>/lecture/<%= Video.id %>/<%= comment.id %>" method="post">
+                                                        <textarea name = 'text' class="one form-control pe-4 bg-light" id="autoheighttextarea" style="display: inherit;" rows="1" placeholder="Add a comment..."></textarea>
+                                                        <button class="btn btn-primary ms-2 mb-0" style="display: inherit;"  type="submit">Post</button>
+                                                    </form>
+                                                </div>
                                                     </div>
                                                 </div>
+                                            </li>
+                                            <!-- Comment netsed item START -->
+                                            <ul class="list-unstyled ms-4 mb-3 mt-3">
+                                             <% for( let reply of comment.replies ) { %>
+                                                <!-- Comment item START -->
+                                                <li class="comment-item border-bottom">
+                                                    <div class="d-flex">
+                                                       
+                                                        <!-- Comment by -->
+                                                        <div class="ms-2 w-100">
+                                                                <div class="bg-light rounded me-2 d-flex flex-column justify-content-start w-100">
+                                                                    <div class="d-flex w-100"> 
+                                                                        <h6 class="mb-1  lead fw-bold"> <a href="#"> <%= reply.author.username %></a> </h6>
+                                                                        <% if (currentUser.id == reply.author.id) { %>
+                                                                            <form class="ms-auto" action="/course/<%= course.title %>/lecture/<%= Video.id %>/<%= comment.id %>/<%= reply.id %>?_method=delete" method="post"> <button class="btn btn-danger" type="submit"> <img src="/images/trash.svg" alt=""></button></form>
+                                                                        <% } %>
+                                                                    </div>
+                                                                    <p class=" mb-0"><%= reply.text %></p>
+                                                                    <small><%= reply.ago %></small>
+                                                                </div>
+                                                            
+                                                            <!-- Comment react -->
+                                                            <ul class="nav nav-divider ms-3 py-2 small">
+                                                                <li class="nav-item me-1"><a class="text-primary-hover" href="#!"> Like <%= reply.likes %></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- Comment item END -->
+                                             <% } %>
+                                            </ul>
                                         <% } %>
-                                        
-                                        <!-- Comment netsed item START -->
+                                    </ul>
                                            
-                                        </li>
+                                        
                                 <!-- Comment item END -->
 
                     <!-- Content END -->
@@ -164,3 +204,4 @@
     </div>
 </section> 
 </section>
+<script src="/js/script.js"></script>

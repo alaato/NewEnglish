@@ -14,6 +14,9 @@ const CourseRoute = require('./Routes/courseRoute')
 const commentRoute = require('./Routes/commentsRoute')
 const nodemailer = require('nodemailer');
 const ExpressError = require('./Util/ExpressError')
+const methodOverride = require('method-override');
+const MongoStore = require('connect-mongo');
+const dbUrl = 'mongodb://127.0.0.1:27017/zno'
 
 main().catch(err => console.log(err));
 
@@ -31,11 +34,22 @@ async function main() {
 app.engine('ejs', engine)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
+app.use(methodOverride('_method'))
+
 app.use(express.static( "public" ) );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  touchAfter: 24 * 60 * 60,
+  crypto: {
+      secret: 'thisshouldbeabettersecret!'
+  }
+});
+store.on('error', err => console.log(err));
 
 app.use(session({
+  store,
   httpOnly: true,
   secret: 'keyboard cat',
   resave: false,

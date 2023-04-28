@@ -43,3 +43,7 @@ pxfzmodzslcdryrk password
 
 10alaato@gmail.com
 kybexy@mailo.icu
+
+
+mongo atlas wT5wBkMHoKbCm4I2
+const dbUrl = "mongodb+srv://snowflake:wT5wBkMHoKbCm4I2@cluster0.dpoq4pf.mongodb.net/?retryWrites=true&w=majority"

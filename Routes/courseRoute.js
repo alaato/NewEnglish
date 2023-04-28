@@ -57,9 +57,10 @@ router.get('/:title/lecture/:id',UserExists, UserHasCourse, async(req, res) => {
     });
   const Video = await Videos.findById(id).populate({
     path: 'comments',
-    populate: {
-      path : 'author'
-    }
+    populate: [
+      { path: 'author' },
+      { path: 'replies', populate: { path: 'author' } }
+    ]
   });
   res.render('Courses/videoshow', {Video, course});
   })

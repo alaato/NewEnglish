@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const moment = require('moment');
 
 const CommentSchema = new Schema({
     text : {
@@ -11,7 +12,7 @@ const CommentSchema = new Schema({
     },
     replies : [{
         type : Schema.Types.ObjectId,
-        ref : 'replies'
+        ref : 'reply'
     }],
     video : {
         type : Schema.Types.ObjectId,
@@ -20,9 +21,16 @@ const CommentSchema = new Schema({
     likes : Number,
     date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
       }
 })
+CommentSchema.virtual('formattedDate').get(function() {
+    return moment(this.date).format('YYYY MM DD');
+  });
+CommentSchema.virtual('ago').get(function() {
+    const date = moment(this.date).format();
+    return moment(date).fromNow();
+  });
 
 module.exports = model('comment', CommentSchema)
 
