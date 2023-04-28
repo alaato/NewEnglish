@@ -21,15 +21,9 @@ const dbUrl = 'mongodb://127.0.0.1:27017/zno'
 main().catch(err => console.log(err));
 
 async function main() {
-    try {
+
         console.log("connected to zno");
         await mongoose.connect('mongodb://127.0.0.1:27017/zno');
-      } catch (error) {
-        handleError(error);
-      }
-      mongoose.connection.on('error', err => {
-        logError(err);
-      });
 }
 app.engine('ejs', engine)
 app.set('view engine', 'ejs')
