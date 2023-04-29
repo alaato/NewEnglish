@@ -19,7 +19,7 @@ router.post('/signup', async(req,res, next)=>{
             userId: User._id,
             token: require('crypto').randomBytes(64).toString('hex'),
           }).save();
-          const message = `http://localhost:3000/verify/${User.id}/${token.token}`;
+          const message = `https://newenglsih.onrender.com/verify/${User.id}/${token.token}`;
           console.log(User);
     await sendEmail(User.email, "Verify Email", message);
     req.flash('success',"email was sent successfully, please verify your email")
