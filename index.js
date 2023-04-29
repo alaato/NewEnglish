@@ -27,7 +27,7 @@ async function main() {
         await mongoose.connect(dbUrl);
 }
 app.engine('ejs', engine)
-app.set('view engine', 'ejs')
+app.set('view engine', ejs.renderFile)
 app.set('views', path.join(__dirname, 'views'))
 app.use(methodOverride('_method'))
 
