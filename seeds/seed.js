@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const course = require('../Models/courses') 
 const vid = require('../Models/videos')
+const dbUrl = "mongodb+srv://snowflake:wT5wBkMHoKbCm4I2@cluster0.dpoq4pf.mongodb.net/?retryWrites=true&w=majority"
 
 main().catch(err => console.log(err));
 
 async function main() {
     try {
         console.log("connected mongoose");
-        await mongoose.connect('mongodb://127.0.0.1:27017/zno');
+        await mongoose.connect(dbUrl);
       } catch (error) {
         handleError(error);
       }
