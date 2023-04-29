@@ -19,6 +19,7 @@ const isCommentAuthor = async(req, res, next) => {
     }
     else
     {
+        console.log(comment.author.id, req.user.id)
         req.flash('error','You dont have the permission to do so')
         res.redirect('/');
     }
