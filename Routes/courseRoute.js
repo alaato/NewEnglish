@@ -25,6 +25,8 @@ router.get('/:title', async(req, res) => {
     const {title} = req.params;
     const course = await Course.findOne({title:title});
     const User = req.user;
+    const userId = req.user.id;
+    console.log(userId)
     await User.populate('subscribedCourses')
     for (let Subcourse of User.subscribedCourses)
     {

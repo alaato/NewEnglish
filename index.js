@@ -44,7 +44,7 @@ const store = MongoStore.create({
 store.on('error', err => console.log(err));
 
 app.use(session({
-  store,
+  store:store,
   httpOnly: true,
   secret: 'keyboard cat',
   resave: false,
