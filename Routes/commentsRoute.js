@@ -22,8 +22,8 @@ router.post('',(async (req, res)=>{
     const Comment = await comment.findById(review_id)
     const Reply = new reply(req.body)
     Reply.author = req.user._id
-    await Reply.save()
     Comment.replies.push(Reply)
+    await Reply.save()
     await Comment.save()
     res.redirect(`/course/${title}/lecture/${id}`)
   }))

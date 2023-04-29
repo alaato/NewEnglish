@@ -31,18 +31,23 @@ const isCommentAuthor = async(req, res, next) => {
 
 }
 const isreplyAuthor = async(req, res, next) => {
-    const {reply_id} = req.params;
-    const Reply = await reply.findById(reply_id)
-    if(Reply.author == req.user._id)
-    {
-        next();
-    }
-    else
-    {
-        req.flash('error','You dont have the permission to do so')
-        res.redirect('/');
-    }
+    try {
+        const {reply_id} = req.params;
+        const Reply = await reply.findById(reply_id)
+        if(Reply.author == req.user.id)
+        {
+            next();
+        }
+        else
+        {
+            req.flash('error','You dont have the permission to do so')
+            res.redirect('/');
+        }
 
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 
 const isnotLogedIn = (req, res, next) => {
