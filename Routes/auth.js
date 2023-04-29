@@ -34,9 +34,7 @@ router.post('/signup', async(req,res, next)=>{
 router.get("/verify/:id/:token", async (req, res) => {
     try {
       const {id} = req.params;
-      console.log(id)
       const User = await user.findById(id);
-      console.log(User)
       if (!User) return res.status(400).send("Invalid link");
       const token = await Token.findOne({
         userId: User.id,
@@ -45,7 +43,6 @@ router.get("/verify/:id/:token", async (req, res) => {
       if (!token) return res.status(400).send("Invalid link");
   
       await user.findOneAndUpdate({ _id: User.id}, {confirmed: true });
-      console.log(User)
       await Token.findByIdAndRemove(token._id);
   
       req.flash('success','email verfied, you may log in now')

@@ -11,6 +11,8 @@ const isLoggedIn = (req, res, next) => {
     }
 }
 const isCommentAuthor = async(req, res, next) => {
+    try {
+        console.log(session)
     const {review_id} = req.params;
     const Comment = await comment.findById(review_id)
     if(Comment.author.id == req.user.id)
@@ -23,6 +25,10 @@ const isCommentAuthor = async(req, res, next) => {
         req.flash('error','You dont have the permission to do so')
         res.redirect('/');
     }
+    } catch (error) {
+        console.log(error)
+    }
+    
 
 }
 const isreplyAuthor = async(req, res, next) => {
@@ -67,7 +73,6 @@ const UserHasCourse = async(req, res, next) => {
         const {title} = req.params
         const User = req.user;
         await User.populate('subscribedCourses')
-        console.log(User.subscribedCourses)
         if (User.subscribedCourses.length !=0)
         {
             for (let course of User.subscribedCourses)

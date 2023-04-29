@@ -28,7 +28,6 @@ router.get('/:title', async(req, res) => {
     await User.populate('subscribedCourses')
     for (let Subcourse of User.subscribedCourses)
     {
-      console.log(course.id, Subcourse.id)
       if (course.id == Subcourse.id)
       {
         hasCourse = true;

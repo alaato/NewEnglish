@@ -8,9 +8,7 @@ const {isCommentAuthor,isreplyAuthor} = require('../middlewares/auth');
 
 router.post('',(async (req, res)=>{
     const {id, title} = req.params
-    console.log(id, title)
     const Video = await video.findById(id)
-    console.log(Video)
     const Comment = new comment(req.body)
     Comment.author = req.user._id
     Video.comments.push(Comment)
@@ -21,9 +19,7 @@ router.post('',(async (req, res)=>{
   }))
   router.post('/:review_id',(async(req,res)=>{
     const {review_id, title, id} = req.params
-    console.log(review_id)
     const Comment = await comment.findById(review_id)
-    console.log(Comment)
     const Reply = new reply(req.body)
     Reply.author = req.user._id
     await Reply.save()
