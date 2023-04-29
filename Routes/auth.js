@@ -62,6 +62,7 @@ router.post('/login',verifyUser,passport.authenticate('local', {keepSessionInfo:
     failureFlash: true,
     successFlash: true,
     }), (req, res, next) => {
+      req.session.user = req.user;
         req.flash('success', `welcome to our site ${req.user.username}`);
         const redirect = req.session.returnTo||'/userinfo'
         res.redirect(redirect );
