@@ -17,6 +17,7 @@ const ExpressError = require('./Util/ExpressError')
 const methodOverride = require('method-override');
 const MongoStore = require('connect-mongo');
 const dbUrl = "mongodb+srv://snowflake:wT5wBkMHoKbCm4I2@cluster0.dpoq4pf.mongodb.net/?retryWrites=true&w=majority" || 'mongodb://127.0.0.1:27017/zno' 
+const ejs = require('ejs')
 
 
 main().catch(err => console.log(err));
