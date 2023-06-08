@@ -7,13 +7,13 @@ const sendEmail = async (email, subject, text) => {
       host: "smtp.gmail.com",
       secure: false,
       auth: {
-        user: "toalaa9@gmail.com",
+        user: email,
         pass: "pxfzmodzslcdryrk"
       }
     });
     
     var mailOptions = {
-      from: 'toalaa9@gmail.com',
+      from: process.env.email,
       to: email,
       subject: subject,
       text: text,

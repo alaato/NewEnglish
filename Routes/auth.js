@@ -4,8 +4,7 @@ const user = require('../Models/users');
 const passport = require('passport');
 const Token = require("../Models/token");
 const sendEmail = require('../Util/sendEmail');
-const verifyUser = require('../middlewares/verifyUser');
-const {UserExists, isLoggedIn} = require('../middlewares/auth');
+const {UserExists, isLoggedIn, verifyUser} = require('../middlewares/auth');
 
 router.get('/signup', (req, res) => {
     res.render('./authuntication/signup');

@@ -10,7 +10,12 @@ const ReplySchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'user'
     },
-    likes : Number,
+    likes : [
+      {
+          type : Schema.Types.ObjectId,
+          ref : 'user'
+      }
+  ],
     date: {
         type: Date,
         default: Date.now

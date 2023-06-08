@@ -3,8 +3,22 @@
 <section class="row  align-items-center justify-content-center ">
     <div class="col">
         <div class="mt-5 ratio ratio-16x9">
-            <iframe  src="<%= Video.url %>" title="YouTube video player"></iframe>
-        </div>
+            <!-- <iframe  src="<%= Video.url %>" title="YouTube video player">
+</iframe> -->
+<!--player code begin-->
+<div id="svp_player1smua7m6nrno" style="width:720px;height:594px;position:relative;">
+	
+</div>
+<script language="javascript" type="text/javascript" src="//play.streamingvideoprovider.com/js/dplayer.js"></script>
+<script language="javascript">
+<!--
+var vars = {clip_id:"1smua7m6nrno",transparent:"true",pause:"1",repeat:"",bg_color:"#ffffff",fs_mode:"2",no_controls:"",start_img:"0",start_volume:"100",close_button:"",brand_new_window:"1",auto_hide:"1",stretch_video:"",player_align:"NONE",offset_x:"0",offset_y:"0",player_color_ratio:0.6,skinAlpha:"80",colorBase:"#ffffff",colorIcon:"#000000",colorHighlight:"#5cbbf5",direct:"false",is_responsive:"true",viewers_limit:0,cc_position:"bottom",cc_positionOffset:70,cc_multiplier:0.03,cc_textColor:"#ffffff",cc_textOutlineColor:"#ffffff",cc_bkgColor:"#000000",cc_bkgAlpha:0.1,aspect_ratio:"16:9",play_button:"1",play_button_style:"pulsing",sleek_player:"1",auto_play:"0",auto_play_type:"unMute",floating_player:"none"};
+var svp_player = new SVPDynamicPlayer("svp_player1smua7m6nrno", "", "100%", "100%", {use_div:"svp_player1smua7m6nrno",skin:"3"}, vars);
+svp_player.execute();
+//-->
+</script>
+<noscript>Your browser does not support JavaScript! JavaScript is needed to display this video player.</noscript>
+<!--player code end-->
     </div>
 </section>
 <section class="row justify-content-center course-content">
@@ -140,9 +154,22 @@
                                                                 
                                                             </div>
                                                         <!-- Comment react -->
-                                                        <ul class="nav nav-divider pt-3 small">
-                                                            <li class="nav-item ms-1"> <a class="text-primary-hover" href="#"> <%= comment.like %> Like </a> </li>
-                                                            <li class="nav-item ms-1" > <a class="text-primary-hover reply-button"> Reply</a> </li>
+                                                        <ul class="nav nav-divider pt-3 align-items-center small" >
+                                                            <li class="nav-item me-1" >
+                                                                <span id = '<%= comment.id %>'><%= comment.likes.length %></span>
+                                                                <% if (!comment.likes.includes(currentUser.id)) { %>
+                                                                    
+                                                                    <button onclick="likeComment('<%= comment.id %>','<%= course.title %>' ,'<%= Video.id %>' )"  class="like-button like " >
+                                                                        <i class="fa-sharp fa-regular fa-heart"></i>
+                                                                    </button>
+                                                                <% } else { %> 
+                                                                    <button onclick="likeComment('<%= comment.id %>','<%= course.title %>' ,'<%= Video.id %>' )"  class="like-button unlike " >
+                                                                        <i class="fa-sharp fa-solid fa-heart" style="color: #ed020e;"></i>
+                                                                    </button>
+                                                                    <% } %>
+                                                                
+                                                            </li>
+                                                            <li class="nav-item ms-1 " > <a class="text-primary-hover reply-button"> Reply</a> </li>
                                                             <li class="nav-item ms-1"> <a class="text-primary-hover" href="#"> View  replies</a> </li>
                                                         </ul>
                                                  <!-- Add reply -->
@@ -155,34 +182,46 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <!-- Comment netsed item START -->
+                                            <!-- reply netsed item START -->
                                             <ul class="list-unstyled ms-4 mb-3 mt-3">
                                              <% for( let reply of comment.replies ) { %>
-                                                <!-- Comment item START -->
-                                                <li class="comment-item border-bottom">
+                                                <!-- reply item START -->
+                                                <li class="reply border-bottom">
                                                     <div class="d-flex">
                                                        
-                                                        <!-- Comment by -->
+                                                        <!-- reply by -->
                                                         <div class="ms-2 w-100">
                                                                 <div class="bg-light rounded me-2 d-flex flex-column justify-content-start w-100">
-                                                                    <div class="d-flex w-100"> 
+                                                                    <div class="d-flex align-items-center w-100"> 
                                                                         <h6 class="mb-1  lead fw-bold"> <a href="#"> <%= reply.author.username %></a> </h6>
+                                                                        <small class="d-inline ms-2"><%= comment.ago %></small>
                                                                         <% if (currentUser.id == reply.author.id) { %>
                                                                             <form class="ms-auto" action="/course/<%= course.title %>/lecture/<%= Video.id %>/<%= comment.id %>/<%= reply.id %>?_method=delete" method="post"> <button class="btn btn-danger" type="submit"> <img src="/images/trash.svg" alt=""></button></form>
                                                                         <% } %>
                                                                     </div>
                                                                     <p class=" mb-0"><%= reply.text %></p>
-                                                                    <small><%= reply.ago %></small>
                                                                 </div>
                                                             
-                                                            <!-- Comment react -->
+                                                            <!-- reply react -->
                                                             <ul class="nav nav-divider ms-3 py-2 small">
-                                                                <li class="nav-item me-1"><a class="text-primary-hover" href="#!"> Like <%= reply.likes %></a></li>
+                                                                <li class="nav-item me-1">
+                                                                    <span id = '<%= reply.id %>'><%= reply.likes.length %></span>
+                                                                    <% if (!reply.likes.includes(currentUser.id)) { %>
+                                                                        
+                                                                        <button onclick="likeReply('<%= reply.id %>','<%= comment.id %>','<%= course.title %>' ,'<%= Video.id %>' )"  class="like-button like " >
+                                                                            <i class="fa-sharp fa-regular fa-heart"></i>
+                                                                        </button>
+                                                                    <% } else { %> 
+                                                                        <button onclick="likeReply('<%= reply.id %>','<%= comment.id %>','<%= course.title %>' ,'<%= Video.id %>' )"  class="like-button unlike " >
+                                                                            <i class="fa-sharp fa-solid fa-heart" style="color: #ed020e;"></i>
+                                                                        </button>
+                                                                        <% } %>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <!-- Comment item END -->
+                                                <!-- reply item END -->
                                              <% } %>
                                             </ul>
                                         <% } %>
@@ -204,4 +243,40 @@
     </div>
 </section> 
 </section>
-<script src="/js/script.js"></script>
+<script src="/js/script.js"> console.log(Video.Url)</script>
+<script>
+    function likeComment(commentId, coursetitle, Videoid) {
+      // Send an AJAX request to the server to like/unlike the comment
+      fetch(`/course/${coursetitle}/lecture/${Videoid}/${commentId}/like`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response or update the UI as needed
+          const likesCountElement = document.getElementById(commentId);
+          likesCountElement.textContent = ` ${data.LikesCount}`;
+          console.log(data);
+        })
+        .catch(error => console.error(error));
+    }
+    function likeReply(replyId, commentId, courseTitle, VideoId) {
+      // Send an AJAX request to the server to like/unlike the comment
+      fetch(`/course/${courseTitle}/lecture/${VideoId}/${commentId}/${replyId}/like`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response or update the UI as needed
+          const likesCountElement = document.getElementById(replyId);
+          likesCountElement.textContent = ` ${data.LikesCount}`;
+          console.log(data);
+        })
+        .catch(error => console.error(error));
+    }
+  </script>

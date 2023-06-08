@@ -44,7 +44,9 @@ const store = MongoStore.create({
 store.on('error', err => console.log(err));
 
 app.use(session({
-  store:store,
+  name: 'nothiding',
+  store: store,
+  // secure: true,
   httpOnly: true,
   secret: 'keyboard cat',
   resave: false,
@@ -55,7 +57,6 @@ app.use(session({
 
 }))
 app.use(flash());
-
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -86,7 +87,22 @@ app.all('*', (req, res, next)=>{
 })
 app.use((err, req, res,  next)=>
 {
-res.render('Partials/error',{err})
+  console.log(err)
+  switch (err.status) {
+    case 400:
+      res.status(400).render('Partials/error', {err});
+      break;
+    case 401:
+      res.status(401).send('Unauthorized');
+      break;
+    case 404:
+      res.status(404).render('Partials/error', {err})
+      break;
+    default:
+      res.status(500).render('Partials/error',{err}); 
+      break;
+  }
+
 })
 const PORT = 10000
 app.listen(PORT, ()=> console.log('server is running'));

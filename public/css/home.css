@@ -9,6 +9,10 @@
   width: 70px;
   height: auto
 }
+.navbar-brand
+{
+  padding: 0;
+}
 body
 {
   margin: 0;
@@ -232,6 +236,16 @@ text-align: center;
 {
   height: 3rem;
 }
+
+.like, .unlike
+{
+  border: none;
+  background: none;
+  width: 30px;
+  height: 30px;
+}
+
+
 @media (max-height:600px) {
   .nav-container
   {

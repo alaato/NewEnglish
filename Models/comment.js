@@ -18,7 +18,12 @@ const CommentSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'video'
     },
-    likes : Number,
+    likes : [
+        {
+            type : Schema.Types.ObjectId,
+            ref : 'user'
+        }
+    ],
     date: {
         type: Date,
         default: Date.now,

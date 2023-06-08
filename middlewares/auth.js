@@ -1,5 +1,6 @@
 const comment = require('../Models/comment')
 const reply = require('../Models/reply')
+const user = require('../Models/users')
 const isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
@@ -50,15 +51,6 @@ const isreplyAuthor = async(req, res, next) => {
     
 }
 
-const isnotLogedIn = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        return next();
-    }
-    else
-    {
-        res.redirect('/');
-    }
-}
 const UserExists = async(req, res, next) => {
     const User = req.user;
     if (!User)
@@ -98,4 +90,34 @@ const UserHasCourse = async(req, res, next) => {
     
         
 }
-module.exports = {UserExists, isLoggedIn, UserHasCourse, isCommentAuthor, isreplyAuthor};
+const verifyUser = async(req, res, next) => {
+    try {
+        console.log(req.session)
+
+        const {email} = req.body
+        const User = await user.findOne({email: email})
+        if (User && User.confirmed === true)
+            {
+                next();
+            }
+        else if (User && User.confirmed === false)
+        {
+            req.flash('error', 'verify Your Account')
+            res.redirect('/login');
+
+        }
+        else
+        {
+            req.flash('error', 'Email or Password is wrong')
+            res.redirect('/login');
+        }
+    } catch (error) {
+        req.flash('error', 'verify');
+        console.log(error)
+    }
+    
+
+
+
+}
+module.exports = {UserExists, isLoggedIn, UserHasCourse, isCommentAuthor, isreplyAuthor, verifyUser};
