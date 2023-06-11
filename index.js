@@ -75,7 +75,7 @@ app.use((req,res,next)=>{
 app.use('/course', CourseRoute);
 app.use('/course/:title/lecture/:id', commentRoute);
 app.use(authRoute);
-app.get('/', async(req, res) => {
+app.get('/', async(req, res, next) => {
   const all = await course.find({});
   res.render('Courses/home', {all});
   })
